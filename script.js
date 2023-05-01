@@ -346,7 +346,7 @@ function requestBookPromise(libroIndex) {
         reject("No hay libro en esa posición");
       }
     }, Math.random() * 2000); // tardará entre 0 y 2 segundos
-  }); 
+  });
 
   return promise;
 }
@@ -358,51 +358,98 @@ function requestBookPromise(libroIndex) {
 
 //* metodos de promesas .then() y .catch()
 
-requestBookPromise(0)
-.then((response) => {
-  // que ocurrirá cuando reciba la respuesta de la promesa
-  console.log("leyendo el libro: ", response)
-  
-  // podemos encadenar promesas
-  return requestBookPromise(1) // debemos retornar para encadenarlas
-})
-.then((response) => {
-  console.log("leyendo el libro: ", response)
+// requestBookPromise(0)
+// .then((response) => {
+//   // que ocurrirá cuando reciba la respuesta de la promesa
+//   console.log("leyendo el libro: ", response)
 
-  return requestBookPromise(2)
-})
-.then((response) => {
-  console.log("leyendo el libro: ", response)
-})
-.catch((error) => {
-  // que ocurrirá cuando haya algun fallo en la promesa
-  console.log(error)
-})
+//   // podemos encadenar promesas
+//   return requestBookPromise(1) // debemos retornar para encadenarlas
+// })
+// .then((response) => {
+//   console.log("leyendo el libro: ", response)
+
+//   return requestBookPromise(2)
+// })
+// .then((response) => {
+//   console.log("leyendo el libro: ", response)
+// })
+// .catch((error) => {
+//   // que ocurrirá cuando haya algun fallo en la promesa
+//   console.log(error)
+// })
 
 //* Promise.all() => recibe es un array de varias promesas
 
-Promise.all( [
-  requestBookPromise(0),
-  requestBookPromise(6),
-  requestBookPromise(2),
-] )
-.then((allResponses) => {
-  console.log(allResponses)
-})
-.catch((error) => {
-  // si al menos una de ellas falla, todo falla
-  console.log(error)
-})
-
+// Promise.all( [
+//   requestBookPromise(0),
+//   requestBookPromise(6),
+//   requestBookPromise(2),
+// ] )
+// .then((allResponses) => {
+//   console.log(allResponses)
+// })
+// .catch((error) => {
+//   // si al menos una de ellas falla, todo falla
+//   console.log(error)
+// })
 
 //* Promise.allSettled() => recibe es un array de varias promesas
 
-Promise.allSettled( [
-  requestBookPromise(0),
-  requestBookPromise(6),
-  requestBookPromise(2),
-] )
-.then((allResponses) => {
-  // nos devuelve un array con el status y el valor/razón de cada promesa
-  console.log(allResponses)
-})
+// Promise.allSettled( [
+//   requestBookPromise(0),
+//   requestBookPromise(6),
+//   requestBookPromise(2),
+// ] )
+// .then((allResponses) => {
+//   // nos devuelve un array con el status y el valor/razón de cada promesa
+//   console.log(allResponses)
+// })
+
+// Async Await => palabras reservadas que introdujo JS recientemente
+
+// const getData = async () => {
+async function getData() {
+  try {
+    // try significa: Intenta hacer todo esto...
+
+    const book1 = await requestBookPromise(0); // 0.5 seg
+    // await
+    // 1. Espera a que la promesa se haya resuelto correctamente (fulfilled)
+    // 2. nos da el valor retornado de la promesa
+    console.log(book1);
+
+    const book2 = await requestBookPromise(6); // 1 seg
+    console.log(book2);
+
+    const book3 = await requestBookPromise(2); // 0.8 seg
+    console.log(book3);
+  } catch (error) {
+    // ... y si algo falla, ejecuta esto
+    console.log(error);
+  }
+}
+
+getData();
+
+// Ejemplo Real de recibir data
+
+const button = document.querySelector("#get-data");
+const div = document.querySelector("#logos")
+button.addEventListener("click", () => {
+  fetch("https://api.spacexdata.com/v5/launches/latest")
+    .then((response) => {
+      // console.log(response)
+      return response.json();
+    })
+    .then((launchData) => {
+      console.log(launchData.links.patch.small);
+
+      const image = new Image()
+      image.src = launchData.links.patch.small
+      div.append(image)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
