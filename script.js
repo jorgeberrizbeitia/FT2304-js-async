@@ -287,45 +287,45 @@ function requestBook(
 
 // requestBook( 1, recibirAlgo )
 
-// requestBook(
-//   0,
-//   (response) => {
-//     console.log("Leyendo el libro", response);
+requestBook(
+  0,
+  (response) => {
+    console.log("Leyendo el libro", response);
 
-//     requestBook(
-//       5,
-//       (response) => {
-//         console.log("Leyendo el libro", response);
+    requestBook(
+      5,
+      (response) => {
+        console.log("Leyendo el libro", response);
 
-//         requestBook(
-//           2,
-//           (response) => {
-//             console.log("Leyendo el libro", response);
+        requestBook(
+          2,
+          (response) => {
+            console.log("Leyendo el libro", response);
 
-//             requestBook(
-//               3,
-//               (response) => {
-//                 console.log("Leyendo el libro", response);
-//               },
-//               (errorMessage) => {
-//                 console.log(errorMessage);
-//               }
-//             );
-//           },
-//           (errorMessage) => {
-//             console.log(errorMessage);
-//           }
-//         );
-//       },
-//       (errorMessage) => {
-//         console.log(errorMessage);
-//       }
-//     );
-//   },
-//   (errorMessage) => {
-//     console.log(errorMessage);
-//   }
-// );
+            requestBook(
+              3,
+              (response) => {
+                console.log("Leyendo el libro", response);
+              },
+              (errorMessage) => {
+                console.log(errorMessage);
+              }
+            );
+          },
+          (errorMessage) => {
+            console.log(errorMessage);
+          }
+        );
+      },
+      (errorMessage) => {
+        console.log(errorMessage);
+      }
+    );
+  },
+  (errorMessage) => {
+    console.log(errorMessage);
+  }
+);
 
 //* PROMESAS
 
@@ -358,53 +358,53 @@ function requestBookPromise(libroIndex) {
 
 //* metodos de promesas .then() y .catch()
 
-// requestBookPromise(0)
-// .then((response) => {
-//   // que ocurrirá cuando reciba la respuesta de la promesa
-//   console.log("leyendo el libro: ", response)
+requestBookPromise(0)
+.then((response) => {
+  // que ocurrirá cuando reciba la respuesta de la promesa
+  console.log("leyendo el libro: ", response)
 
-//   // podemos encadenar promesas
-//   return requestBookPromise(1) // debemos retornar para encadenarlas
-// })
-// .then((response) => {
-//   console.log("leyendo el libro: ", response)
+  // podemos encadenar promesas
+  return requestBookPromise(1) // debemos retornar para encadenarlas
+})
+.then((response) => {
+  console.log("leyendo el libro: ", response)
 
-//   return requestBookPromise(2)
-// })
-// .then((response) => {
-//   console.log("leyendo el libro: ", response)
-// })
-// .catch((error) => {
-//   // que ocurrirá cuando haya algun fallo en la promesa
-//   console.log(error)
-// })
+  return requestBookPromise(2)
+})
+.then((response) => {
+  console.log("leyendo el libro: ", response)
+})
+.catch((error) => {
+  // que ocurrirá cuando haya algun fallo en la promesa
+  console.log(error)
+})
 
 //* Promise.all() => recibe es un array de varias promesas
 
-// Promise.all( [
-//   requestBookPromise(0),
-//   requestBookPromise(6),
-//   requestBookPromise(2),
-// ] )
-// .then((allResponses) => {
-//   console.log(allResponses)
-// })
-// .catch((error) => {
-//   // si al menos una de ellas falla, todo falla
-//   console.log(error)
-// })
+Promise.all( [
+  requestBookPromise(0),
+  requestBookPromise(6),
+  requestBookPromise(2),
+] )
+.then((allResponses) => {
+  console.log(allResponses)
+})
+.catch((error) => {
+  // si al menos una de ellas falla, todo falla
+  console.log(error)
+})
 
 //* Promise.allSettled() => recibe es un array de varias promesas
 
-// Promise.allSettled( [
-//   requestBookPromise(0),
-//   requestBookPromise(6),
-//   requestBookPromise(2),
-// ] )
-// .then((allResponses) => {
-//   // nos devuelve un array con el status y el valor/razón de cada promesa
-//   console.log(allResponses)
-// })
+Promise.allSettled( [
+  requestBookPromise(0),
+  requestBookPromise(6),
+  requestBookPromise(2),
+] )
+.then((allResponses) => {
+  // nos devuelve un array con el status y el valor/razón de cada promesa
+  console.log(allResponses)
+})
 
 // Async Await => palabras reservadas que introdujo JS recientemente
 
