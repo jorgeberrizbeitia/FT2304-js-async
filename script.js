@@ -359,26 +359,26 @@ function requestBookPromise(libroIndex) {
 // console.log( laPromesa )
 
 
-// requestBookPromise(0)
-// .then((response) => {
-//   // que ocurrirá cuando reciba la respuesta de la promesa
-//   console.log("leyendo el libro: ", response)
+requestBookPromise(0)
+.then((response) => {
+  // que ocurrirá cuando reciba la respuesta de la promesa
+  console.log("leyendo el libro: ", response)
   
-//   // podemos encadenar promesas
-//   return requestBookPromise(1) // debemos retornar para encadenarlas
-// })
-// .then((response) => {
-//   console.log("leyendo el libro: ", response)
+  // podemos encadenar promesas
+  return requestBookPromise(1) // debemos retornar para encadenarlas
+})
+.then((response) => {
+  console.log("leyendo el libro: ", response)
 
-//   return requestBookPromise(2)
-// })
-// .then((response) => {
-//   console.log("leyendo el libro: ", response)
-// })
-// .catch((error) => {
-//   // que ocurrirá cuando haya algun fallo en la promesa
-//   console.log(error)
-// })
+  return requestBookPromise(2)
+})
+.then((response) => {
+  console.log("leyendo el libro: ", response)
+})
+.catch((error) => {
+  // que ocurrirá cuando haya algun fallo en la promesa
+  console.log(error)
+})
 
 // Promise.all() => recibe es un array de varias promesas
 
