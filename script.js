@@ -353,11 +353,10 @@ function requestBookPromise(libroIndex) {
 
 //? España
 
-
-// metodos de promesas .then() y .catch()
 // let laPromesa = requestBookPromise(6)
 // console.log( laPromesa )
 
+//* metodos de promesas .then() y .catch()
 
 requestBookPromise(0)
 .then((response) => {
@@ -380,7 +379,7 @@ requestBookPromise(0)
   console.log(error)
 })
 
-// Promise.all() => recibe es un array de varias promesas
+//* Promise.all() => recibe es un array de varias promesas
 
 Promise.all( [
   requestBookPromise(0),
@@ -396,7 +395,7 @@ Promise.all( [
 })
 
 
-// Promise.all() => recibe es un array de varias promesas
+//* Promise.allSettled() => recibe es un array de varias promesas
 
 Promise.allSettled( [
   requestBookPromise(0),
